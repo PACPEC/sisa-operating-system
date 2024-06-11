@@ -3,15 +3,26 @@ OUTPUT_FORMAT("elf32-sisa","elf32-sisa","elf32-sisa")
 OUTPUT_ARCH(sisa)
 SECTIONS
 {
-  .user : {
-    . = 0x000;
+  . = 0x000;
+
+  .usercode : {
     PROVIDE (__user_start = .);
+    user.o(.text)
+    user.o(.rodata)
+    . = ALIGN(2);
+  }
+
+  . = 0x4000;
+
+  .userdata : {
+    user.o(.data)
   }
 
   __user_end = __user_start + SIZEOF(.user);
 
+  . = 0xc000;
+
   .system : {
-    . = 0xc000 ;
     *(.text)
     *(.rodata)
     . = ALIGN(2);
@@ -19,8 +30,9 @@ SECTIONS
 
   __entry_point = LOADADDR(.system);
   
+  . = 0x8000 ;
+
   .sysdata : {
-    . = 0x8000 ;
     PROVIDE(system_stack_top = .);
     . += 4096;
     PROVIDE(system_stack_bottom = .);
