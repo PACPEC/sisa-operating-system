@@ -1,8 +1,9 @@
 void RSG();
+void umain();
 
 __attribute__((noreturn)) void kmain() {
   // User space switch
-  int *userpc = 0x0000;
+  int *userpc = umain;
   __asm__ (
     "wrs s0, %0\n\t"
     "wrs s1, %1\n\t"

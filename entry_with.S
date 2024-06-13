@@ -1,5 +1,7 @@
 .include "macros.s"
 
+.set PILA, system_stack_bottom ; donada, posició de memòria ha de ser no ocupada
+
 ; data section
 ; all the vectors of RSI and RSE will be saved here
 .data
