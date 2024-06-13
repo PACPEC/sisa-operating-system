@@ -49,7 +49,7 @@
     $MOVEI r7, PILA    ;inicializamos R7 como puntero a la pila
     $MOVEI r5, __exit  ;Inicializamos R5 con la direccion de la rutina de retorno des de la rutina principal
     $MOVEI r6, main    ;direccion de la rutina principal
-ei
+    ei
     jmp   r6           ;saltamos a la runtina principal
 
 
