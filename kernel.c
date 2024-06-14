@@ -1,9 +1,15 @@
+
+// global kernel variables to update
+int tics_timer;
+char tecla_pulsada;
+
 void RSG();
 void umain();
 
 __attribute__((noreturn)) void kmain() {
   // User space switch
   int *userpc = umain;
+  int a = *(int *)0x9000;
   __asm__ (
     "wrs s0, %0\n\t"
     "wrs s1, %1\n\t"

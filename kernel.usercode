@@ -3,42 +3,10 @@ kernel:     file format elf32-sisa
 
 Disassembly of section .usercode:
 
-00000000 <print>:
-   0:	2ffa 	addi	r7, r7, -6
-   2:	4bc2 	st	4(r7), r5
-   4:	4dc1 	st	2(r7), r6
-   6:	2dc2 	addi	r6, r7, 2
-   8:	45c0 	st	0(r7), r2
-   a:	5a00 	movi	r5, 0
-   c:	6a0a 	bz	r5, 22
-   e:	3382 	ld	r1, 4(r6)
-  10:	d440 	ldb	r2, 0(r1)
-  12:	3383 	ld	r1, 6(r6)
-  14:	e440 	stb	0(r1), r2
-  16:	3382 	ld	r1, 4(r6)
-  18:	2241 	addi	r1, r1, 1
-  1a:	4382 	st	4(r6), r1
-  1c:	3383 	ld	r1, 6(r6)
-  1e:	2242 	addi	r1, r1, 2
-  20:	4383 	st	6(r6), r1
-  22:	3382 	ld	r1, 4(r6)
-  24:	d440 	ldb	r2, 0(r1)
-  26:	520a 	movi	r1, 10
-  28:	1299 	cmpeq	r1, r2, r1
-  2a:	6303 	bnz	r1, 8
-  2c:	3382 	ld	r1, 4(r6)
-  2e:	d240 	ldb	r1, 0(r1)
-  30:	63ee 	bnz	r1, -34
-  32:	35c0 	ld	r2, 0(r7)
-  34:	3dc1 	ld	r6, 2(r7)
-  36:	3bc2 	ld	r5, 4(r7)
-  38:	2fc6 	addi	r7, r7, 6
-  3a:	a143 	jmp	r5
-
-0000003c <umain>:
-  3c:	2ffc 	addi	r7, r7, -4
-  3e:	4bc1 	st	2(r7), r5
-  40:	4dc0 	st	0(r7), r6
-  42:	2dc0 	addi	r6, r7, 0
-  44:	5a00 	movi	r5, 0
-  46:	6afe 	bz	r5, -2
+00000000 <umain>:
+   0:	2ffc 	addi	r7, r7, -4
+   2:	4bc1 	st	2(r7), r5
+   4:	4dc0 	st	0(r7), r6
+   6:	2dc0 	addi	r6, r7, 0
+   8:	5a00 	movi	r5, 0
+   a:	6afe 	bz	r5, -2

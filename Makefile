@@ -20,10 +20,11 @@ kernel: $(OBJECTS) system.lds
 	./limpiar.pl codigo $^
 
 %.data: %
-	sisa-objdump -d --section=.sysdata $^ > $@
+	sisa-objdump -z -d --section=.sysdata $^ > $@
 
 %.data.rom %.data.DE1.hex %.data.DE2-115.hex: %.data
-	./limpiar.pl datos $^
+	# ./limpiar.pl datos $^
+	awk '{print $$2}' $^ | grep '^[0-9a-f][0-9a-f]*$$' >$@
 
 %.usercode: %
 	sisa-objdump -d --section=.usercode $^ > $@
