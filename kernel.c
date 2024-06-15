@@ -39,6 +39,7 @@ __attribute__((noreturn)) void kmain() {
 }
 
 // Syscalls code
+// could be put onto another file
 
 // Get the global variable of number of ticks
 void getTicks_call() {
@@ -46,6 +47,11 @@ void getTicks_call() {
     // I'll get the input parameter of the user routine, in the userstack
     int *ret;
     __asm__ ("ld %0, 48(r7)" : "=r"(ret) : );
-    *ret = tics_timer;
+    copy_to_user(&tics_timer, ret, sizeof(int));
 }
 
+void getKey_call() {
+    char *ret;
+    __asm__ ("ld %0, 48(r7)" : "=r"(ret) : );
+    copy_to_user(&tecla_pulsada, ret, sizeof(char));
+}

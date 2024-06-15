@@ -254,3 +254,12 @@ Disassembly of section .usercode:
  1de:	31c0 	ld	r0, 0(r7)
  1e0:	2fc2 	addi	r7, r7, 2
  1e2:	a183 	jmp	r6
+
+000001e4 <getKey>:
+ 1e4:	2ffe 	addi	r7, r7, -2
+ 1e6:	41c0 	st	0(r7), r0
+ 1e8:	5001 	movi	r0, 1
+ 1ea:	a007 	calls	r0
+ 1ec:	31c0 	ld	r0, 0(r7)
+ 1ee:	2fc2 	addi	r7, r7, 2
+ 1f0:	a183 	jmp	r6

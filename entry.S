@@ -28,7 +28,7 @@
         
     call_sys_vector:
         .word getTicks_call  ; 0 Hay que definirla en el S.O.
-        .word RSE_default_resume  ; 1 Hay que definirla en el S.O.
+        .word getKey_call  ; 1 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 2 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 3 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 4 Hay que definirla en el S.O.
