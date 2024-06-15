@@ -1,3 +1,7 @@
 
 kernel:     file format elf32-sisa
 
+Disassembly of section .userdata:
+
+00004000 <vga>:
+    4000:	a000 	jz	r0, r0

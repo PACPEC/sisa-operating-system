@@ -8,7 +8,9 @@ SECTIONS
   .usercode : {
     PROVIDE (__user_start = .);
     user.o(.text)
+    wrappers.o(.text)
     user.o(.rodata)
+    wrappers.o(.rodata)
     . = ALIGN(2);
   }
 
@@ -16,6 +18,7 @@ SECTIONS
 
   .userdata : {
     user.o(.data)
+    wrappers.o(.data)
   }
 
   __user_end = __user_start + SIZEOF(.user);

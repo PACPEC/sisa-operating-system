@@ -5,7 +5,7 @@ LD = sisa-ld
 CFLAGS = -g3 -O0 -Wall
 LDFLAGS = -T system.lds
 
-OBJECTS = entry.o kernel.o user.o
+OBJECTS = entry.o kernel.o user.o wrappers.o
 
 .PHONY: all
 all: kernel.code.DE1.hex kernel.data.DE1.hex kernel.usercode.DE1.hex kernel.userdata.DE1.hex
@@ -20,9 +20,11 @@ kernel: $(OBJECTS) system.lds
 	./limpiar.pl codigo $^
 
 %.data: %
-	sisa-objdump -z -d --section=.sysdata $^ > $@
+	sisa-objdump -z -D --section=.sysdata $^ > $@
 
 %.data.rom %.data.DE1.hex %.data.DE2-115.hex: %.data
+	# limpiar.pl falla si hi ha molts zeros sintetitzats a la sortida de sisa-objdump
+	# substituït per commanda awk + grep directament, molt més senzilla
 	# ./limpiar.pl datos $^
 	awk '{print $$2}' $^ | grep '^[0-9a-f][0-9a-f]*$$' >$@
 
@@ -33,10 +35,11 @@ kernel: $(OBJECTS) system.lds
 	./limpiar.pl codigo $^
 
 %.userdata: %
-	sisa-objdump -d --section=.userdata $^ > $@
+	sisa-objdump -z -D --section=.userdata $^ > $@
 
 %.userdata.rom %.userdata.DE1.hex %.userdata.DE2-115.hex: %.userdata
-	./limpiar.pl datos $^
+	# ./limpiar.pl datos $^
+	awk '{print $$2}' $^ | grep '^[0-9a-f][0-9a-f]*$$' >$@
 
 .PHONY: run
 run: kernel.data.rom kernel.code.rom kernel.usercode.rom kernel.userdata.rom

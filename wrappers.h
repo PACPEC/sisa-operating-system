@@ -1,0 +1,2 @@
+
+void getTicks(int *ticks);
