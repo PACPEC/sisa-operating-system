@@ -5,7 +5,9 @@ LD = sisa-ld
 CFLAGS = -g3 -O0 -Wall
 LDFLAGS = -T system.lds
 
-OBJECTS = entry.o kernel.o user.o wrappers.o syscalls.o kernel_utils.o 
+OBJECTS += $(patsubst %.c,%.o,$(wildcard *.c))
+OBJECTS += $(patsubst %.S,%.o,$(wildcard *.S))
+OBJECTS += $(patsubst %.c,%.o,$(wildcard programs/*.c))
 
 .PHONY: all
 all: kernel.code.DE1.hex kernel.data.DE1.hex kernel.usercode.DE1.hex kernel.userdata.DE1.hex
@@ -47,4 +49,4 @@ run: kernel.data.rom kernel.code.rom kernel.usercode.rom kernel.userdata.rom
 
 .PHONY: clean
 clean:
-	rm -vf *.o *.hex *.rom *.code *.data kernel
+	rm -vf $(OBJECTS) *.hex *.rom *.code *.data kernel

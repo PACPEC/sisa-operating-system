@@ -103,7 +103,7 @@ unsigned int fibonacci_recursiu(unsigned int n)
     cada vez que se pulsa KEY2 muestra el siguiente valor de la sucesion
 */
 
-int main (void)
+int fibonacci_main (void)
 {
     int pulsador;
     unsigned int interruptores;
