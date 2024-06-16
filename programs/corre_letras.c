@@ -155,7 +155,7 @@ void reset_corre_letras(void)
 }
 
 
-int main (void) {
+int corre_letras_main (void) {
 
     unsigned int tics_anterior=0;
     int pause=0;
