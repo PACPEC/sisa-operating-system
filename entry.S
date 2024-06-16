@@ -35,7 +35,7 @@
         .word RSE_default_resume  ; 5 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 6 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 7 Hay que definirla en el S.O.
-
+    
 ; code section 
 .text
     ; ============================================
@@ -68,11 +68,18 @@
         JMP R6
 
     ; ============================================
-    ;           Interrupt service routine 
+    ;        Interrupt service routine
+    ;    (only entry point to the system)
     ; ============================================
     .global RSG
     RSG: ; Salvar el estado
          $push  R0, R1, R2, R3, R4, R5, R6
+         movi   r0, lo(user_stack)
+         movhi  r0, hi(user_stack)
+         st     0(r0), r7         ; save the user stack point to global kernel variable 
+         movi   r0, lo(system_stack)
+         movhi  r0, hi(system_stack)
+         ld     r7, 0(r0)       ; set the always lasting kernel stack
          rds    R1, S0
          rds    R2, S1
          rds    R3, S3
@@ -116,6 +123,9 @@
          wrs   S3, R3
          wrs   S1, R2
          wrs   S0, R1
+         movi  r0, lo(user_stack)
+         movhi r0, hi(user_stack)
+         ld    r7, 0(r0)        ; restore the user stack context upon returning
          $pop  R6, R5, R4, R3, R2, R1, R0
          reti
 

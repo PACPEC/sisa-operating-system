@@ -3,7 +3,7 @@ OUTPUT_FORMAT("elf32-sisa","elf32-sisa","elf32-sisa")
 OUTPUT_ARCH(sisa)
 SECTIONS
 {
-  . = 0x000;
+  . = 0x0000;
 
   .usercode : {
     PROVIDE (__user_start = .);
@@ -17,6 +17,9 @@ SECTIONS
   . = 0x4000;
 
   .userdata : {
+    PROVIDE(user_stack_top = .);
+    . += 4096;
+    PROVIDE(user_stack_bottom = .);
     user.o(.data)
     wrappers.o(.data)
   }

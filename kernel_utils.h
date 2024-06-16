@@ -2,6 +2,9 @@
 #ifndef __KERNEL_UTILS
 #define __KERNEL_UTILS
 
+void *user_stack;
+void *system_stack;
+
 // global kernel variables to update
 int tics_timer;
 char tecla_pulsada;

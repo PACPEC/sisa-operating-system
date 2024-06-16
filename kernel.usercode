@@ -12,7 +12,7 @@ Disassembly of section .usercode:
    a:	5a00 	movi	r5, 0
    c:	6a10 	bz	r5, 34
    e:	5200 	movi	r1, 0
-  10:	5340 	movhi	r1, 64
+  10:	5350 	movhi	r1, 80
   12:	3440 	ld	r2, 0(r1)
   14:	3382 	ld	r1, 4(r6)
   16:	d240 	ldb	r1, 0(r1)
@@ -21,11 +21,11 @@ Disassembly of section .usercode:
   1c:	2241 	addi	r1, r1, 1
   1e:	4382 	st	4(r6), r1
   20:	5200 	movi	r1, 0
-  22:	5340 	movhi	r1, 64
+  22:	5350 	movhi	r1, 80
   24:	3240 	ld	r1, 0(r1)
   26:	2442 	addi	r2, r1, 2
   28:	5200 	movi	r1, 0
-  2a:	5340 	movhi	r1, 64
+  2a:	5350 	movhi	r1, 80
   2c:	4440 	st	0(r1), r2
   2e:	3382 	ld	r1, 4(r6)
   30:	d240 	ldb	r1, 0(r1)
@@ -36,15 +36,15 @@ Disassembly of section .usercode:
   3a:	1299 	cmpeq	r1, r2, r1
   3c:	62e8 	bz	r1, -46
   3e:	5400 	movi	r2, 0
-  40:	5540 	movhi	r2, 64
+  40:	5550 	movhi	r2, 80
   42:	5220 	movi	r1, 32
   44:	4280 	st	0(r2), r1
   46:	5200 	movi	r1, 0
-  48:	5340 	movhi	r1, 64
+  48:	5350 	movhi	r1, 80
   4a:	3240 	ld	r1, 0(r1)
   4c:	2442 	addi	r2, r1, 2
   4e:	5200 	movi	r1, 0
-  50:	5340 	movhi	r1, 64
+  50:	5350 	movhi	r1, 80
   52:	4440 	st	0(r1), r2
   54:	35c0 	ld	r2, 0(r7)
   56:	3dc1 	ld	r6, 2(r7)
@@ -210,56 +210,54 @@ Disassembly of section .usercode:
  18a:	4bcf 	st	30(r7), r5
  18c:	4dce 	st	28(r7), r6
  18e:	2ddc 	addi	r6, r7, 28
- 190:	2ff4 	addi	r7, r7, -12
+ 190:	2ff6 	addi	r7, r7, -10
  192:	45c1 	st	2(r7), r2
  194:	47c0 	st	0(r7), r3
- 196:	5200 	movi	r1, 0
- 198:	43bf 	st	-2(r6), r1
- 19a:	2ffe 	addi	r7, r7, -2
- 19c:	25c0 	addi	r2, r7, 0
- 19e:	23bc 	addi	r1, r6, -4
- 1a0:	4280 	st	0(r2), r1
- 1a2:	52d6 	movi	r1, -42
- 1a4:	5301 	movhi	r1, 1
- 1a6:	aa44 	jal	r5, r1
- 1a8:	2fc2 	addi	r7, r7, 2
- 1aa:	33be 	ld	r1, -4(r6)
- 1ac:	2ffc 	addi	r7, r7, -4
+ 196:	23be 	addi	r1, r6, -2
+ 198:	2ffc 	addi	r7, r7, -4
+ 19a:	25c0 	addi	r2, r7, 0
+ 19c:	4280 	st	0(r2), r1
+ 19e:	56de 	movi	r3, -34
+ 1a0:	03a3 	add	r1, r6, r3
+ 1a2:	4281 	st	2(r2), r1
+ 1a4:	52bc 	movi	r1, -68
+ 1a6:	5300 	movhi	r1, 0
+ 1a8:	aa44 	jal	r5, r1
+ 1aa:	2fc4 	addi	r7, r7, 4
+ 1ac:	2ffe 	addi	r7, r7, -2
  1ae:	25c0 	addi	r2, r7, 0
- 1b0:	4280 	st	0(r2), r1
- 1b2:	56dc 	movi	r3, -36
- 1b4:	03a3 	add	r1, r6, r3
- 1b6:	4281 	st	2(r2), r1
- 1b8:	52bc 	movi	r1, -68
- 1ba:	5300 	movhi	r1, 0
- 1bc:	aa44 	jal	r5, r1
- 1be:	2fc4 	addi	r7, r7, 4
- 1c0:	2ffe 	addi	r7, r7, -2
- 1c2:	25c0 	addi	r2, r7, 0
- 1c4:	56dc 	movi	r3, -36
- 1c6:	03a3 	add	r1, r6, r3
- 1c8:	4280 	st	0(r2), r1
- 1ca:	5200 	movi	r1, 0
- 1cc:	5300 	movhi	r1, 0
- 1ce:	aa44 	jal	r5, r1
- 1d0:	2fc2 	addi	r7, r7, 2
- 1d2:	5a00 	movi	r5, 0
- 1d4:	6afe 	bz	r5, -2
+ 1b0:	56de 	movi	r3, -34
+ 1b2:	03a3 	add	r1, r6, r3
+ 1b4:	4280 	st	0(r2), r1
+ 1b6:	5200 	movi	r1, 0
+ 1b8:	5300 	movhi	r1, 0
+ 1ba:	aa44 	jal	r5, r1
+ 1bc:	2fc2 	addi	r7, r7, 2
+ 1be:	2ffe 	addi	r7, r7, -2
+ 1c0:	25c0 	addi	r2, r7, 0
+ 1c2:	23be 	addi	r1, r6, -2
+ 1c4:	4280 	st	0(r2), r1
+ 1c6:	52d2 	movi	r1, -46
+ 1c8:	5301 	movhi	r1, 1
+ 1ca:	aa44 	jal	r5, r1
+ 1cc:	2fc2 	addi	r7, r7, 2
+ 1ce:	5a00 	movi	r5, 0
+ 1d0:	6afe 	bz	r5, -2
 
-000001d6 <getTicks>:
- 1d6:	2ffe 	addi	r7, r7, -2
- 1d8:	41c0 	st	0(r7), r0
- 1da:	5000 	movi	r0, 0
- 1dc:	a007 	calls	r0
- 1de:	31c0 	ld	r0, 0(r7)
- 1e0:	2fc2 	addi	r7, r7, 2
- 1e2:	a183 	jmp	r6
+000001d2 <getTicks>:
+ 1d2:	2ffe 	addi	r7, r7, -2
+ 1d4:	41c0 	st	0(r7), r0
+ 1d6:	5000 	movi	r0, 0
+ 1d8:	a007 	calls	r0
+ 1da:	31c0 	ld	r0, 0(r7)
+ 1dc:	2fc2 	addi	r7, r7, 2
+ 1de:	a183 	jmp	r6
 
-000001e4 <getKey>:
- 1e4:	2ffe 	addi	r7, r7, -2
- 1e6:	41c0 	st	0(r7), r0
- 1e8:	5001 	movi	r0, 1
- 1ea:	a007 	calls	r0
- 1ec:	31c0 	ld	r0, 0(r7)
- 1ee:	2fc2 	addi	r7, r7, 2
- 1f0:	a183 	jmp	r6
+000001e0 <getKey>:
+ 1e0:	2ffe 	addi	r7, r7, -2
+ 1e2:	41c0 	st	0(r7), r0
+ 1e4:	5001 	movi	r0, 1
+ 1e6:	a007 	calls	r0
+ 1e8:	31c0 	ld	r0, 0(r7)
+ 1ea:	2fc2 	addi	r7, r7, 2
+ 1ec:	a183 	jmp	r6
