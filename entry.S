@@ -76,7 +76,7 @@
          $push  R0, R1, R2, R3, R4, R5, R6
          movi   r0, lo(user_stack)
          movhi  r0, hi(user_stack)
-         st     0(r0), r7         ; save the user stack point to global kernel variable 
+         st     0(r0), r7         ; save the user stack point to global kernel variable
          movi   r0, lo(system_stack)
          movhi  r0, hi(system_stack)
          ld     r7, 0(r0)       ; set the always lasting kernel stack

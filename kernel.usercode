@@ -210,54 +210,26 @@ Disassembly of section .usercode:
  18a:	4bcf 	st	30(r7), r5
  18c:	4dce 	st	28(r7), r6
  18e:	2ddc 	addi	r6, r7, 28
- 190:	2ff6 	addi	r7, r7, -10
- 192:	45c1 	st	2(r7), r2
- 194:	47c0 	st	0(r7), r3
- 196:	23be 	addi	r1, r6, -2
- 198:	2ffc 	addi	r7, r7, -4
- 19a:	25c0 	addi	r2, r7, 0
- 19c:	4280 	st	0(r2), r1
- 19e:	56de 	movi	r3, -34
- 1a0:	03a3 	add	r1, r6, r3
- 1a2:	4281 	st	2(r2), r1
- 1a4:	52bc 	movi	r1, -68
- 1a6:	5300 	movhi	r1, 0
- 1a8:	aa44 	jal	r5, r1
- 1aa:	2fc4 	addi	r7, r7, 4
- 1ac:	2ffe 	addi	r7, r7, -2
- 1ae:	25c0 	addi	r2, r7, 0
- 1b0:	56de 	movi	r3, -34
- 1b2:	03a3 	add	r1, r6, r3
- 1b4:	4280 	st	0(r2), r1
- 1b6:	5200 	movi	r1, 0
- 1b8:	5300 	movhi	r1, 0
- 1ba:	aa44 	jal	r5, r1
- 1bc:	2fc2 	addi	r7, r7, 2
- 1be:	2ffe 	addi	r7, r7, -2
- 1c0:	25c0 	addi	r2, r7, 0
- 1c2:	23be 	addi	r1, r6, -2
- 1c4:	4280 	st	0(r2), r1
- 1c6:	52d2 	movi	r1, -46
- 1c8:	5301 	movhi	r1, 1
- 1ca:	aa44 	jal	r5, r1
- 1cc:	2fc2 	addi	r7, r7, 2
- 1ce:	5a00 	movi	r5, 0
- 1d0:	6afe 	bz	r5, -2
+ 190:	2ff8 	addi	r7, r7, -8
+ 192:	52ff 	movi	r1, -1
+ 194:	43be 	st	-4(r6), r1
+ 196:	5a00 	movi	r5, 0
+ 198:	6afe 	bz	r5, -2
 
-000001d2 <getTicks>:
- 1d2:	2ffe 	addi	r7, r7, -2
- 1d4:	41c0 	st	0(r7), r0
- 1d6:	5000 	movi	r0, 0
- 1d8:	a007 	calls	r0
- 1da:	31c0 	ld	r0, 0(r7)
- 1dc:	2fc2 	addi	r7, r7, 2
- 1de:	a183 	jmp	r6
+0000019a <getTicks>:
+ 19a:	2ffe 	addi	r7, r7, -2
+ 19c:	41c0 	st	0(r7), r0
+ 19e:	5000 	movi	r0, 0
+ 1a0:	a007 	calls	r0
+ 1a2:	31c0 	ld	r0, 0(r7)
+ 1a4:	2fc2 	addi	r7, r7, 2
+ 1a6:	a183 	jmp	r6
 
-000001e0 <getKey>:
- 1e0:	2ffe 	addi	r7, r7, -2
- 1e2:	41c0 	st	0(r7), r0
- 1e4:	5001 	movi	r0, 1
- 1e6:	a007 	calls	r0
- 1e8:	31c0 	ld	r0, 0(r7)
- 1ea:	2fc2 	addi	r7, r7, 2
- 1ec:	a183 	jmp	r6
+000001a8 <getKey>:
+ 1a8:	2ffe 	addi	r7, r7, -2
+ 1aa:	41c0 	st	0(r7), r0
+ 1ac:	5001 	movi	r0, 1
+ 1ae:	a007 	calls	r0
+ 1b0:	31c0 	ld	r0, 0(r7)
+ 1b2:	2fc2 	addi	r7, r7, 2
+ 1b4:	a183 	jmp	r6

@@ -6,8 +6,8 @@ void *user_stack;
 void *system_stack;
 
 // global kernel variables to update
-int tics_timer;
-char tecla_pulsada;
+unsigned int tics_timer;
+unsigned int tecla_pulsada;
 
 void RSG();
 void umain();
