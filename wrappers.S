@@ -10,7 +10,7 @@ getTicks:
     calls r0
     ld r0, 0(r7)
     addi r7,r7, 2
-    jmp r6 
+    jmp r5 
     
 .globl getKey 
 .type getKey, @function
@@ -22,4 +22,4 @@ getKey:
     calls r0
     ld r0, 0(r7)
     addi r7,r7, 2
-    jmp r6 
+    jmp r5 

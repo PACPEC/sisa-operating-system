@@ -210,26 +210,68 @@ Disassembly of section .usercode:
  18a:	4bcf 	st	30(r7), r5
  18c:	4dce 	st	28(r7), r6
  18e:	2ddc 	addi	r6, r7, 28
- 190:	2ff8 	addi	r7, r7, -8
- 192:	52ff 	movi	r1, -1
- 194:	43be 	st	-4(r6), r1
- 196:	5a00 	movi	r5, 0
- 198:	6afe 	bz	r5, -2
+ 190:	2ff4 	addi	r7, r7, -12
+ 192:	45c1 	st	2(r7), r2
+ 194:	47c0 	st	0(r7), r3
+ 196:	52ff 	movi	r1, -1
+ 198:	43be 	st	-4(r6), r1
+ 19a:	5200 	movi	r1, 0
+ 19c:	43bf 	st	-2(r6), r1
+ 19e:	5a00 	movi	r5, 0
+ 1a0:	6a03 	bz	r5, 8
+ 1a2:	33bf 	ld	r1, -2(r6)
+ 1a4:	2241 	addi	r1, r1, 1
+ 1a6:	43bf 	st	-2(r6), r1
+ 1a8:	33bf 	ld	r1, -2(r6)
+ 1aa:	54e7 	movi	r2, -25
+ 1ac:	5503 	movhi	r2, 3
+ 1ae:	124a 	cmple	r1, r1, r2
+ 1b0:	63f8 	bnz	r1, -14
+ 1b2:	2ffe 	addi	r7, r7, -2
+ 1b4:	25c0 	addi	r2, r7, 0
+ 1b6:	23bc 	addi	r1, r6, -4
+ 1b8:	4280 	st	0(r2), r1
+ 1ba:	52ee 	movi	r1, -18
+ 1bc:	5301 	movhi	r1, 1
+ 1be:	aa44 	jal	r5, r1
+ 1c0:	2fc2 	addi	r7, r7, 2
+ 1c2:	33be 	ld	r1, -4(r6)
+ 1c4:	2ffc 	addi	r7, r7, -4
+ 1c6:	25c0 	addi	r2, r7, 0
+ 1c8:	4280 	st	0(r2), r1
+ 1ca:	56dc 	movi	r3, -36
+ 1cc:	03a3 	add	r1, r6, r3
+ 1ce:	4281 	st	2(r2), r1
+ 1d0:	52bc 	movi	r1, -68
+ 1d2:	5300 	movhi	r1, 0
+ 1d4:	aa44 	jal	r5, r1
+ 1d6:	2fc4 	addi	r7, r7, 4
+ 1d8:	2ffe 	addi	r7, r7, -2
+ 1da:	25c0 	addi	r2, r7, 0
+ 1dc:	56dc 	movi	r3, -36
+ 1de:	03a3 	add	r1, r6, r3
+ 1e0:	4280 	st	0(r2), r1
+ 1e2:	5200 	movi	r1, 0
+ 1e4:	5300 	movhi	r1, 0
+ 1e6:	aa44 	jal	r5, r1
+ 1e8:	2fc2 	addi	r7, r7, 2
+ 1ea:	5a00 	movi	r5, 0
+ 1ec:	6afe 	bz	r5, -2
 
-0000019a <getTicks>:
- 19a:	2ffe 	addi	r7, r7, -2
- 19c:	41c0 	st	0(r7), r0
- 19e:	5000 	movi	r0, 0
- 1a0:	a007 	calls	r0
- 1a2:	31c0 	ld	r0, 0(r7)
- 1a4:	2fc2 	addi	r7, r7, 2
- 1a6:	a183 	jmp	r6
+000001ee <getTicks>:
+ 1ee:	2ffe 	addi	r7, r7, -2
+ 1f0:	41c0 	st	0(r7), r0
+ 1f2:	5000 	movi	r0, 0
+ 1f4:	a007 	calls	r0
+ 1f6:	31c0 	ld	r0, 0(r7)
+ 1f8:	2fc2 	addi	r7, r7, 2
+ 1fa:	a143 	jmp	r5
 
-000001a8 <getKey>:
- 1a8:	2ffe 	addi	r7, r7, -2
- 1aa:	41c0 	st	0(r7), r0
- 1ac:	5001 	movi	r0, 1
- 1ae:	a007 	calls	r0
- 1b0:	31c0 	ld	r0, 0(r7)
- 1b2:	2fc2 	addi	r7, r7, 2
- 1b4:	a183 	jmp	r6
+000001fc <getKey>:
+ 1fc:	2ffe 	addi	r7, r7, -2
+ 1fe:	41c0 	st	0(r7), r0
+ 200:	5001 	movi	r0, 1
+ 202:	a007 	calls	r0
+ 204:	31c0 	ld	r0, 0(r7)
+ 206:	2fc2 	addi	r7, r7, 2
+ 208:	a143 	jmp	r5

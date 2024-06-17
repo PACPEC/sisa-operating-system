@@ -5,7 +5,7 @@ LD = sisa-ld
 CFLAGS = -g3 -O0 -Wall
 LDFLAGS = -T system.lds
 
-OBJECTS = entry.o kernel.o user.o wrappers.o syscalls.o kernel_utils.o 
+OBJECTS = entry.o kernel.o user.o wrappers.o kernel_utils.o 
 
 .PHONY: all
 all: kernel.code.DE1.hex kernel.data.DE1.hex kernel.usercode.DE1.hex kernel.userdata.DE1.hex

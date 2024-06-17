@@ -1,4 +1,3 @@
-#include "syscalls.h"
 #include "kernel_utils.h"
 
 __attribute__((noreturn)) void kmain() {
