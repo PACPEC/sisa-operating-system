@@ -2,12 +2,11 @@
 #ifndef __KERNEL_UTILS
 #define __KERNEL_UTILS
 
-void *user_stack;
-void *system_stack;
+extern void *user_stack;
+extern void *system_stack;
 
-// global kernel variables to update
-unsigned int tics_timer;
-unsigned int tecla_pulsada;
+extern unsigned int tics_timer;
+extern unsigned int tecla_pulsada;
 
 void RSG();
 void umain();

@@ -27,8 +27,8 @@
         .word RSE_default_halt    ; 13 Excepcion de proteccion
         
     call_sys_vector:
-        .word getTicks_call  ; 0 Hay que definirla en el S.O.
-        .word getKey_call  ; 1 Hay que definirla en el S.O.
+        .word getTics_call  ; 0 Hay que definirla en el S.O.
+        .word RSE_default_resume  ; 1 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 2 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 3 Hay que definirla en el S.O.
         .word RSE_default_resume  ; 4 Hay que definirla en el S.O.
@@ -74,11 +74,9 @@
     .global RSG
     RSG: ; Salvar el estado
          $push  R0, R1, R2, R3, R4, R5, R6
-         movi   r0, lo(user_stack)
-         movhi  r0, hi(user_stack)
+         $MOVEI r0, user_stack
          st     0(r0), r7         ; save the user stack point to global kernel variable
-         movi   r0, lo(system_stack)
-         movhi  r0, hi(system_stack)
+         $MOVEI r0, system_stack
          ld     r7, 0(r0)       ; set the always lasting kernel stack
          rds    R1, S0
          rds    R2, S1
@@ -123,8 +121,7 @@
          wrs   S3, R3
          wrs   S1, R2
          wrs   S0, R1
-         movi  r0, lo(user_stack)
-         movhi r0, hi(user_stack)
+         $MOVEI r0, user_stack
          ld    r7, 0(r0)        ; restore the user stack context upon returning
          $pop  R6, R5, R4, R3, R2, R1, R0
          reti
@@ -149,4 +146,28 @@
         st     0(r4), r3          ;updates the variable with the new pressed key
         jmp    r6                 ;R6 contains (as it has not been modified) the return address to end the RSG (end of interrupt service)
 
+    ; ============================================
+    ;               Syscalls code 
+    ; ============================================
+    getTics_call:
+        $push   r3
+        $MOVEI  r4, tics_timer ; load the tics_timer variable
+        ld      r3, 0(r4)
+        $MOVEI  r0, user_stack
+        ld      r0, 0(r0) 
+        ld      r0, 0(r0) ; pointer to user stack
+        st      -4(r0), r3 ; return to user_stack the value of tics_timer
+        $pop    r3
+        jmp     r6
+
+    getKey_call:
+        $push   r3
+        $MOVEI  r4, tecla_pulsada ; load the tics_timer variable
+        ld      r3, 0(r4)
+        $MOVEI  r0, user_stack
+        ld      r0, 0(r0) 
+        ld      r0, 0(r0) ; pointer to user stack
+        st      -4(r0), r3 ; return to user_stack the value of tics_timer
+        $pop    r3
+        jmp     r6
 
