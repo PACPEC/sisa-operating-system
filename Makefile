@@ -43,7 +43,7 @@ kernel: $(OBJECTS) system.lds
 
 .PHONY: run
 run: kernel.data.rom kernel.code.rom kernel.usercode.rom kernel.userdata.rom
-	sisa-emu -v -l addr=0x8000,file=kernel.data.rom -l addr=0xC000,file=kernel.code.rom -l addr=0x0000,file=kernel.usercode.rom -l addr=0x4000,file=kernel.userdata.rom
+	sisa-emu -v -e -l addr=0x8000,file=kernel.data.rom -l addr=0xC000,file=kernel.code.rom -l addr=0x0000,file=kernel.usercode.rom -l addr=0x4000,file=kernel.userdata.rom
 
 .PHONY: clean
 clean:

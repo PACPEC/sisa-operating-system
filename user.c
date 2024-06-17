@@ -50,10 +50,12 @@ char* itoa(int num, char* str) {
 }
 
 __attribute__((noreturn)) void umain() {
-    int t;
+    int t = -1;
     char buff[32];
-    itoa(&t, buff);
-    printu(buff);
-    getTicks(&t);
+    int i;
+    
+    // getTicks(&t);
+    // itoa(t, buff);
+    // printu(buff);
     for (;;);
 }
