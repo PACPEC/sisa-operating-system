@@ -5,18 +5,23 @@ typedef struct {
     char pid; // PID = -1 is a free PCB
     void * sp;
     void * pc;
+    void * kernel_sp;
 } TaskStruct;
 
 typedef union
 {
     TaskStruct task;
-    char stack[512];
+    int stack[256];
 } TaskUnion;
 
 void init_tasks();
 
-void prepare_userspace_jump(TaskStruct * task);
-
 TaskStruct * create_task(void * main);
+
+void userspace_jump(TaskStruct * task);
+
+void task_switch(TaskStruct * task);
+
+TaskStruct * current_task();
 
 #endif //PROCESS_H

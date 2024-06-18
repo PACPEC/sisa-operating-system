@@ -5,6 +5,9 @@
 #define MAX_TASKS 2
 
 extern char user_stack_bottom;
+extern void * user_stack;
+
+extern void __finRSG();
 
 TaskUnion tasks[MAX_TASKS];
 char next_free_pid = 0;
@@ -29,9 +32,13 @@ TaskStruct * create_task(void * main) {
         // Assign a PID
         tu->task.pid = next_free_pid++;
 
-        // Prepare for task switch
+        // Prepare for userspace jump
         tu->task.sp = &user_stack_bottom - (tu->task.pid * 512);
         tu->task.pc = main;
+
+        // Prepare for task switch
+        tu->stack[sizeof(tu->stack) - 11] = __finRSG;
+        tu->task.kernel_sp = &tu->stack[sizeof(tu->stack) - 14];
     }
 
     return &tu->task;
@@ -60,4 +67,36 @@ void userspace_jump(TaskStruct * task) {
         "reti"
         : : "r"(task->pc), "r"(task->sp), "r"(system_stack): "r0", "r1", "r7", "s0", "s1", "s6"
     );
+}
+
+void task_switch(TaskStruct * task) {
+    task->sp = user_stack;
+
+    __asm__(
+        "rds r0, s5\n"
+        "st 0(%0), r0\n"
+        "st 0(%1), r7\n"
+        "ld r7, 0(%2)\n"
+        "ld r0, 0(%3)\n"
+        "wrs s5, r0"
+        : : "r"(current_task()->pc), "r"(&current_task()->kernel_sp), "r"(&task->kernel_sp), "r"(&task->pc)
+    );
+
+    user_stack = task->sp;
+
+    void * system_stack = ((TaskUnion *) task)->stack + sizeof(TaskUnion) - 2;
+    __asm__("wrs s6, %0" : : "r"(system_stack));
+}
+
+TaskStruct * current_task() {
+    void * sp;
+    __asm__("st 0(%0), r7" : : "r"(&sp));
+
+    for (int i = 0; i < MAX_TASKS; ++i) {
+        if (&tasks[i] <= sp && sp < &tasks[i+1]) {
+            return &tasks[i];
+        }
+    }
+
+    return NULL;
 }

@@ -72,11 +72,12 @@
     ;    (only entry point to the system)
     ; ============================================
     .global RSG
+    .global __finRSG ; for first task switch
     RSG: ; Salvar el estado
-         $push  R0, R1, R2, R3, R4, R5, R6
          $MOVEI r0, user_stack
          st     0(r0), r7         ; save the user stack point to global kernel variable
          rds    R7, S6
+         $push  R0, R1, R2, R3, R4, R5, R6
          rds    R1, S0
          rds    R2, S1
          rds    R3, S3
