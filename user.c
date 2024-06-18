@@ -52,9 +52,8 @@ char* itoa(int num, char* str) {
 __attribute__((noreturn)) void umain() {
     int t = -1;
     char buff[32];
-    int i;
-
-    for(i=0; i<500; i++);
+    int i, j;
+    for(i=0; i<10000; i++) for(j=0; j<100; j++);
     getKey(&t);
     itoa(t, buff);
     printu(buff);
