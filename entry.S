@@ -154,9 +154,9 @@
         $MOVEI  r4, tics_timer ; load the tics_timer variable
         ld      r3, 0(r4)
         $MOVEI  r0, user_stack
-        ld      r0, 0(r0) 
-        ld      r0, 0(r0) ; pointer to user stack
-        st      -4(r0), r3 ; return to user_stack the value of tics_timer
+        ld      r0, 0(r0)
+        ld      r0, 14(r0)
+        st      0(r0), r3 ; return to user_stack the value of tics_timer
         $pop    r3
         jmp     r6
 
@@ -166,8 +166,8 @@
         ld      r3, 0(r4)
         $MOVEI  r0, user_stack
         ld      r0, 0(r0) 
-        ld      r0, 0(r0) ; pointer to user stack
-        st      -4(r0), r3 ; return to user_stack the value of tics_timer
+        ld      r0, 14(r0) ; pointer to user stack
+        st      0(r0), r3 ; return to user_stack the value of tics_timer
         $pop    r3
         jmp     r6
 
