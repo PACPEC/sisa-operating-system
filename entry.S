@@ -76,8 +76,7 @@
          $push  R0, R1, R2, R3, R4, R5, R6
          $MOVEI r0, user_stack
          st     0(r0), r7         ; save the user stack point to global kernel variable
-         $MOVEI r0, system_stack
-         ld     r7, 0(r0)       ; set the always lasting kernel stack
+         rds    R7, S6
          rds    R1, S0
          rds    R2, S1
          rds    R3, S3

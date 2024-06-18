@@ -1,3 +1,5 @@
+#include "../wrappers.h"
+
 /**************************************************************
 * Borra la pantalla: Escribe 80x30 caracteres (espacios con   *
 * fondo negro) en la memoria de la pantalla (0xA000)          *
@@ -125,9 +127,6 @@ char colores[] = {BLANCO, ROJO, VERDE, AZUL, GRIS_OSCURO, AZUL_CIELO, AMARILLO, 
 int divisores[] = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 char mensaje[] = "pulsa 'R' para reiniciar o 'P' para pausa.";
 
-unsigned int tics_timer=0;     //variable global cuyo valor es modificado por la interrupcion de reloj
-unsigned int tecla_pulsada=0;  //variable global cuyo valor es modificado por la interrupcion de teclado
-
 struct letra_t
 {
     int posicion;    // posicion dentro la linea
@@ -164,36 +163,40 @@ int corre_letras_main (void) {
         
         reset_corre_letras();
 
+        char key;
+        getKey(&key);
+
         while (1) {
-            switch (tecla_pulsada)
+            switch (key)
             {
             case 'r':    case 'R':
                 reset_corre_letras();
-                tecla_pulsada=0;
                 break;
 
             case 'p':    case 'P':
                 if (pause==0) pause=1; else pause=0;
-                tecla_pulsada=0;
                 break;
 
             default:
                 break;
             }
 
+            int ticks;
+            getTicks(&ticks);
+
             if (pause==0) {
                 // para DEBUG: mostramos los valores del timer por los leds verdes
                 __asm__ ( "out %0, %1" 
                         : /* sin salidas*/
-                        : "i" (5), "r" (tics_timer));
+                        : "i" (5), "r" (ticks));
                 // fin DEBUG
 
-                if (tics_timer!=tics_anterior) {
-                    tics_anterior=tics_timer;
+                if (ticks!=tics_anterior) {
+                    tics_anterior=ticks;
 
                     int fila;
                     for (fila=0; fila<NUMERO_LETRAS; fila++) {
-                        if (tics_timer%divisores[fila]==0) {
+                        if (ticks%divisores[fila]==0) {
                             borrar_letra(fila,letra[fila].posicion);
                             if (letra[fila].posicion<80)
                                 letra[fila].posicion++;

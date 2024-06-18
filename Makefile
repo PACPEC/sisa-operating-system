@@ -2,7 +2,7 @@ AS = sisa-as
 CC = sisa-gcc
 LD = sisa-ld
 
-CFLAGS = -g3 -O0 -Wall
+CFLAGS = -g3 -O0 -Wall --std=c99
 LDFLAGS = -T system.lds
 
 OBJECTS += $(patsubst %.c,%.o,$(wildcard *.c))
@@ -46,6 +46,10 @@ kernel: $(OBJECTS) system.lds
 .PHONY: run
 run: kernel.data.rom kernel.code.rom kernel.usercode.rom kernel.userdata.rom
 	sisa-emu -s 2500 -v -e -l addr=0x8000,file=kernel.data.rom -l addr=0xC000,file=kernel.code.rom -l addr=0x0000,file=kernel.usercode.rom -l addr=0x4000,file=kernel.userdata.rom
+
+.PHONY: run_novga
+run_novga: kernel.data.rom kernel.code.rom kernel.usercode.rom kernel.userdata.rom
+	sisa-emu -s 1 -e -l addr=0x8000,file=kernel.data.rom -l addr=0xC000,file=kernel.code.rom -l addr=0x0000,file=kernel.usercode.rom -l addr=0x4000,file=kernel.userdata.rom
 
 .PHONY: clean
 clean:

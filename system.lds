@@ -7,10 +7,8 @@ SECTIONS
 
   .usercode : {
     PROVIDE (__user_start = .);
-    user.o(.text)
     wrappers.o(.text)
     programs/*.o(.text)
-    user.o(.rodata)
     wrappers.o(.rodata)
     programs/*.o(.rodata)
     . = ALIGN(2);
@@ -20,13 +18,10 @@ SECTIONS
 
   .userdata : {
     PROVIDE(user_stack_top = .);
-    . += 4096;
+    . += 0x2000;
     PROVIDE(user_stack_bottom = .);
-    user.o(.data)
     wrappers.o(.data)
   }
-
-  __user_end = __user_start + SIZEOF(.user);
 
   . = 0xc000;
 
