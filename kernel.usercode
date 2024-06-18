@@ -223,15 +223,15 @@ Disassembly of section .usercode:
  1a4:	2241 	addi	r1, r1, 1
  1a6:	43bf 	st	-2(r6), r1
  1a8:	33bf 	ld	r1, -2(r6)
- 1aa:	54e7 	movi	r2, -25
- 1ac:	5503 	movhi	r2, 3
+ 1aa:	54f3 	movi	r2, -13
+ 1ac:	5501 	movhi	r2, 1
  1ae:	124a 	cmple	r1, r1, r2
  1b0:	63f8 	bnz	r1, -14
- 1b2:	2ffe 	addi	r7, r7, -2
- 1b4:	25c0 	addi	r2, r7, 0
- 1b6:	23bc 	addi	r1, r6, -4
- 1b8:	4280 	st	0(r2), r1
- 1ba:	52ee 	movi	r1, -18
+ 1b2:	25bc 	addi	r2, r6, -4
+ 1b4:	2ffe 	addi	r7, r7, -2
+ 1b6:	23c0 	addi	r1, r7, 0
+ 1b8:	4440 	st	0(r1), r2
+ 1ba:	52fc 	movi	r1, -4
  1bc:	5301 	movhi	r1, 1
  1be:	aa44 	jal	r5, r1
  1c0:	2fc2 	addi	r7, r7, 2

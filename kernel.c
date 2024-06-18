@@ -3,6 +3,7 @@
 __attribute__((noreturn)) void kmain() {
     // User space switch
     int * userpc = (int *)umain;
+    
     __asm__ (
       "wrs s0, %0\n\t" // modifiy the system registers for the user "return"
       "wrs s1, %1\n\t"
