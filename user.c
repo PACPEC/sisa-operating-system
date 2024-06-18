@@ -53,8 +53,9 @@ __attribute__((noreturn)) void umain() {
     int t = -1;
     char buff[32];
     int i;
-    for(i=0; i<1000; i++);
-    getTicks(&t);
+
+    for(i=0; i<500; i++);
+    getKey(&t);
     itoa(t, buff);
     printu(buff);
     for (;;);
