@@ -20,6 +20,7 @@ SECTIONS
     . += 0x2000;
     PROVIDE(user_stack_bottom = .);
     wrappers.o(.data)
+    programs/*.o(.data)
   }
 
   . = 0xc000;
