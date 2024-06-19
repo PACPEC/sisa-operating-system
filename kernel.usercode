@@ -238,11 +238,11 @@ Disassembly of section .usercode:
  1c2:	5527 	movhi	r2, 39
  1c4:	124a 	cmple	r1, r1, r2
  1c6:	63ed 	bnz	r1, -36
- 1c8:	25ba 	addi	r2, r6, -6
- 1ca:	2ffe 	addi	r7, r7, -2
- 1cc:	23c0 	addi	r1, r7, 0
- 1ce:	4440 	st	0(r1), r2
- 1d0:	5218 	movi	r1, 24
+ 1c8:	2ffe 	addi	r7, r7, -2
+ 1ca:	25c0 	addi	r2, r7, 0
+ 1cc:	23ba 	addi	r1, r6, -6
+ 1ce:	4280 	st	0(r2), r1
+ 1d0:	5204 	movi	r1, 4
  1d2:	5302 	movhi	r1, 2
  1d4:	aa44 	jal	r5, r1
  1d6:	2fc2 	addi	r7, r7, 2

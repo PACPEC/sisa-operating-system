@@ -72,12 +72,12 @@
     ;    (only entry point to the system)
     ; ============================================
     .global RSG
+    .global __finRSG ; for first task switch
     RSG: ; Salvar el estado
          $push  R0, R1, R2, R3, R4, R5, R6
          $MOVEI r0, user_stack
          st     0(r0), r7         ; save the user stack point to global kernel variable
-         $MOVEI r0, system_stack
-         ld     r7, 0(r0)       ; set the always lasting kernel stack
+         rds    R7, S6
          rds    R1, S0
          rds    R2, S1
          rds    R3, S3
@@ -130,11 +130,14 @@
     ;           Interrupt service routine 
     ; ============================================
     RSI__interrup_timer:
-        $MOVEI r4, tics_timer     ;loads the memory address pointing the data with the number of clock ticks that have arrived
-        ld     r3, 0(r4)          ;loads the number of ticks
-        addi   r3, r3, 1          ;increments them
-        st     0(r4), r3          ;updates the variable with the number of ticks
-        out 6,r3                  ;only for DEBUG; it shows the value on the red LEDs
+        $MOVEI r1, timer_interrupt 
+        jal    r5, r1
+        ; all this will be treated onto C code timer_interrupt() routine
+        ; $MOVEI r4, tics_timer     ;loads the memory address pointing the data with the number of clock ticks that have arrived
+        ; ld     r3, 0(r4)          ;loads the number of ticks
+        ; addi   r3, r3, 1          ;increments them
+        ; st     0(r4), r3          ;updates the variable with the number of ticks
+        ; out 6,r3                  ;only for DEBUG; it shows the value on the red LEDs
         jmp    r6                 ;R6 holds the return address (as it has not been modified) to end the RSG (end of interrupt service)
 
     ; ============================================
