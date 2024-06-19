@@ -1,4 +1,5 @@
 #include "process.h"
+#include "kernel_utils.h"
 
 #include <stddef.h>
 
@@ -31,6 +32,9 @@ TaskStruct * create_task(void * main) {
     if (tu) {
         // Assign a PID
         tu->task.pid = next_free_pid++;
+
+        // Treat as if started with the system
+        tu->task.resume_tick = 0;
 
         // Prepare for userspace jump
         tu->task.sp = &user_stack_bottom - (tu->task.pid * 512);
@@ -103,4 +107,33 @@ int syscall_arg_1(TaskStruct * task) {
     TaskUnion * tu = (TaskUnion *) task;
 
     return tu->stack[sizeof(tu->stack)/sizeof(int) - 3];
+}
+
+TaskStruct * next_sched_task = NULL;
+
+void sched_ready(TaskStruct * task) {
+    next_sched_task = task;
+}
+
+void sched_update() {
+    // NO OP
+}
+
+int sched_should_switch() {
+    const unsigned int QUANTUM = 10;
+
+    if (tics_timer - current_task()->resume_tick >= QUANTUM) {
+        return next_sched_task != NULL;
+    } else {
+        return 0;
+    }
+}
+
+void sched_next() {
+    TaskStruct * next = next_sched_task;
+    next_sched_task = current_task();
+    
+    task_switch(next);
+
+    current_task()->resume_tick = tics_timer;
 }
