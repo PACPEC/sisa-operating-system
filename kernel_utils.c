@@ -13,3 +13,8 @@ void copy_to_user(void *sys, void *usr, int size) {
         *(char *)usr = *(char *)sys;
     }
 }
+
+void timer_interrupt() {
+    tics_timer++; // increment the number of ticks
+    __asm__ ("out 6, %0" : : "a"(tics_timer)); // only for debugging purposes; it shows the value on the red LEDs
+}
