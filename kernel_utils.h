@@ -2,9 +2,6 @@
 #ifndef __KERNEL_UTILS
 #define __KERNEL_UTILS
 
-extern void *user_stack;
-extern void *system_stack;
-
 extern unsigned int tics_timer;
 extern unsigned int tecla_pulsada;
 

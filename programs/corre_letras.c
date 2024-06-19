@@ -164,9 +164,10 @@ int corre_letras_main (void) {
         reset_corre_letras();
 
         char key;
-        getKey(&key);
 
         while (1) {
+            getKey(&key);
+
             switch (key)
             {
             case 'r':    case 'R':

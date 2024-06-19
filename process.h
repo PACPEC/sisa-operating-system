@@ -24,4 +24,6 @@ void task_switch(TaskStruct * task);
 
 TaskStruct * current_task();
 
+int syscall_arg_1(TaskStruct * task);
+
 #endif //PROCESS_H

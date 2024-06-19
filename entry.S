@@ -67,6 +67,33 @@
         wrs   S1, R2
         JMP R6
 
+
+    ; System stack (right after state save in RSG)
+    ;
+    ; |----| <- R7 (stack pointer)
+    ; | S3 | (Accesed @ that caused exception)
+    ; |----|
+    ; | S1 | (Restored PC)
+    ; |----|
+    ; | S0 | (Restored PSW)
+    ; |----|
+    ; | R7 | (Restored SP)
+    ; |----|
+    ; | R6 |
+    ; |----|
+    ; | R5 |
+    ; |----|
+    ; | R4 |
+    ; |----|
+    ; | R3 |
+    ; |----|
+    ; | R2 |
+    ; |----|
+    ; | R1 | (Syscall arg 1)
+    ; |----|
+    ; | R0 |
+    ; |----| <- S6 (system stack base)
+
     ; ============================================
     ;        Interrupt service routine
     ;    (only entry point to the system)
@@ -74,16 +101,16 @@
     .global RSG
     .global __finRSG ; for first task switch
     RSG: ; Salvar el estado
+         wrs    S4, R7
+         rds    R7, S6
          $push  R0, R1, R2, R3, R4, R5, R6
-         $MOVEI r0, user_stack
-         st     0(r0), r7         ; save the user stack point to global kernel variable
-         $MOVEI r0, system_stack
-         ld     r7, 0(r0)
-         ; rds    R7, S6
+         rds    R0, S4
+         $push  R0
          rds    R1, S0
          rds    R2, S1
          rds    R3, S3
          $push  R1, R2, R3
+
          rds    R1, S2                    ;check S2 contents
          movi   R2, 14
          cmpeq  R3, R1, R2                ;if equals 14 will be a syscall 
@@ -123,9 +150,11 @@
          wrs   S3, R3
          wrs   S1, R2
          wrs   S0, R1
-         $MOVEI r0, user_stack
-         ld    r7, 0(r0)        ; restore the user stack context upon returning
+         $pop  R0
+         wrs   S4, R0
          $pop  R6, R5, R4, R3, R2, R1, R0
+         wrs   S6, R7
+         rds   R7, S4
          reti
 
     ; ============================================
@@ -155,24 +184,12 @@
     ;               Syscalls code 
     ; ============================================
     getTics_call:
-        $push   r3
-        $MOVEI  r4, tics_timer ; load the tics_timer variable
-        ld      r3, 0(r4)
-        $MOVEI  r0, user_stack
-        ld      r0, 0(r0)
-        ld      r0, 14(r0)
-        st      0(r0), r3 ; return to user_stack the value of tics_timer
-        $pop    r3
-        jmp     r6
+        $MOVEI r1, sys_getTics
+        jal    r5, r1
+        jmp    r6
 
     getKey_call:
-        $push   r3
-        $MOVEI  r4, tecla_pulsada ; load the tics_timer variable
-        ld      r3, 0(r4)
-        $MOVEI  r0, user_stack
-        ld      r0, 0(r0) 
-        ld      r0, 14(r0) ; pointer to user stack
-        st      0(r0), r3 ; return to user_stack the value of tics_timer
-        $pop    r3
-        jmp     r6
+        $MOVEI r1, sys_getKey
+        jal    r5, r1
+        jmp    r6
 

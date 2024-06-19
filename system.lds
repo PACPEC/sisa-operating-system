@@ -3,10 +3,9 @@ OUTPUT_FORMAT("elf32-sisa","elf32-sisa","elf32-sisa")
 OUTPUT_ARCH(sisa)
 SECTIONS
 {
-  . = 0x0000;
+  . = 0x000;
 
   .usercode : {
-    PROVIDE (__user_start = .);
     wrappers.o(.text)
     programs/*.o(.text)
     wrappers.o(.rodata)
@@ -39,6 +38,7 @@ SECTIONS
     PROVIDE(system_stack_top = .);
     . += 4096;
     PROVIDE(system_stack_bottom = .);
+    *(.kernel_tasks)
     *(.data)
   }
 }
